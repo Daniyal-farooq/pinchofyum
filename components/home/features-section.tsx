@@ -1,4 +1,6 @@
 import { Utensils, Heart, Sparkles, Award } from "lucide-react"
+import { SlideIn } from "@/components/animations/slide-in"
+import { StaggerContainer } from "@/components/animations/stagger-container"
 
 const features = [
   {
@@ -27,14 +29,20 @@ export function FeaturesSection() {
   return (
     <section className="py-20 bg-card">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="text-center mb-12">
-          <span className="text-primary font-medium text-sm uppercase tracking-wider">Why Choose Us</span>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold mt-2 text-foreground">
-            What Makes Us Special
-          </h2>
-        </div>
+        <SlideIn>
+          <div className="text-center mb-12">
+            <span className="text-primary font-medium text-sm uppercase tracking-wider">Why Choose Us</span>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold mt-2 text-foreground">
+              What Makes Us Special
+            </h2>
+          </div>
+        </SlideIn>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <StaggerContainer
+          direction="up"
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          childClassName=""
+        >
           {features.map((feature, index) => (
             <div
               key={index}
@@ -47,7 +55,7 @@ export function FeaturesSection() {
               <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
             </div>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   )

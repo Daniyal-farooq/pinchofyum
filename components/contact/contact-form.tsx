@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Send, CheckCircle } from "lucide-react"
+import { SlideIn } from "@/components/animations/slide-in"
 
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -57,88 +58,90 @@ export function ContactForm() {
   }
 
   return (
-    <div className="bg-card rounded-2xl p-8 shadow-sm">
-      <h3 className="font-serif text-2xl font-bold text-foreground mb-6">Send Us a Message</h3>
+    <SlideIn direction="right">
+      <div className="bg-card rounded-2xl p-8 shadow-sm">
+        <h3 className="font-serif text-2xl font-bold text-foreground mb-6">Send Us a Message</h3>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
-        <div className="space-y-2">
-          <label htmlFor="name" className="text-sm font-medium text-foreground">
-            Your Name
-          </label>
-          <Input
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Enter your name"
-            required
-            className="bg-background border-border focus:border-primary"
-          />
-        </div>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="space-y-2">
+            <label htmlFor="name" className="text-sm font-medium text-foreground">
+              Your Name
+            </label>
+            <Input
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Enter your name"
+              required
+              className="bg-background border-border focus:border-primary"
+            />
+          </div>
 
-        <div className="space-y-2">
-          <label htmlFor="email" className="text-sm font-medium text-foreground">
-            Email Address
-          </label>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Enter your email"
-            required
-            className="bg-background border-border focus:border-primary"
-          />
-        </div>
+          <div className="space-y-2">
+            <label htmlFor="email" className="text-sm font-medium text-foreground">
+              Email Address
+            </label>
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              required
+              className="bg-background border-border focus:border-primary"
+            />
+          </div>
 
-        <div className="space-y-2">
-          <label htmlFor="phone" className="text-sm font-medium text-foreground">
-            Phone Number
-          </label>
-          <Input
-            id="phone"
-            name="phone"
-            type="tel"
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder="Enter your phone number"
-            required
-            className="bg-background border-border focus:border-primary"
-          />
-        </div>
+          <div className="space-y-2">
+            <label htmlFor="phone" className="text-sm font-medium text-foreground">
+              Phone Number
+            </label>
+            <Input
+              id="phone"
+              name="phone"
+              type="tel"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="Enter your phone number"
+              required
+              className="bg-background border-border focus:border-primary"
+            />
+          </div>
 
-        <div className="space-y-2">
-          <label htmlFor="message" className="text-sm font-medium text-foreground">
-            Your Message
-          </label>
-          <Textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            placeholder="Tell us about your order or inquiry..."
-            rows={5}
-            required
-            className="bg-background border-border focus:border-primary resize-none"
-          />
-        </div>
+          <div className="space-y-2">
+            <label htmlFor="message" className="text-sm font-medium text-foreground">
+              Your Message
+            </label>
+            <Textarea
+              id="message"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              placeholder="Tell us about your order or inquiry..."
+              rows={5}
+              required
+              className="bg-background border-border focus:border-primary resize-none"
+            />
+          </div>
 
-        <Button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-full py-6"
-        >
-          {isSubmitting ? (
-            "Sending..."
-          ) : (
-            <>
-              Send Message
-              <Send size={18} className="ml-2" />
-            </>
-          )}
-        </Button>
-      </form>
-    </div>
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-full py-6"
+          >
+            {isSubmitting ? (
+              "Sending..."
+            ) : (
+              <>
+                Send Message
+                <Send size={18} className="ml-2" />
+              </>
+            )}
+          </Button>
+        </form>
+      </div>
+    </SlideIn>
   )
 }

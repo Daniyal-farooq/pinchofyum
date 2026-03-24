@@ -4,6 +4,8 @@ import { useState } from "react"
 import Image from "next/image"
 import { X, Instagram } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { SlideIn } from "@/components/animations/slide-in"
+import { StaggerContainer, StaggerItem } from "@/components/animations/stagger-container"
 
 const galleryImages = [
   {
@@ -83,65 +85,74 @@ export function GalleryGrid() {
     <section className="py-16">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-2 rounded-full font-medium text-sm transition-all duration-300 ${
-                selectedCategory === category
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary/30 text-foreground hover:bg-secondary/50"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+        <SlideIn>
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-6 py-2 rounded-full font-medium text-sm transition-all duration-300 ${
+                  selectedCategory === category
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary/30 text-foreground hover:bg-secondary/50"
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </SlideIn>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <StaggerContainer
+          direction="up"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+          childClassName=""
+        >
           {filteredImages.map((image, index) => (
-            <div
-              key={index}
-              className="group relative aspect-square rounded-xl overflow-hidden cursor-pointer"
-              onClick={() => setSelectedImage(index)}
-            >
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/40 transition-colors duration-300 flex items-center justify-center">
-                <span className="text-card font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {image.category}
-                </span>
+            <StaggerItem key={index} direction="up">
+              <div
+                className="group relative aspect-square rounded-xl overflow-hidden cursor-pointer"
+                onClick={() => setSelectedImage(index)}
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/40 transition-colors duration-300 flex items-center justify-center">
+                  <span className="text-card font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {image.category}
+                  </span>
+                </div>
               </div>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
 
         {/* Instagram CTA */}
-        <div className="text-center mt-16">
-          <p className="text-muted-foreground mb-4">
-            Follow us on Instagram for more delicious updates!
-          </p>
-          <Button
-            asChild
-            className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8"
-          >
-            <a
-              href="https://www.instagram.com/pinchofyumbyeesha"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2"
+        <SlideIn delay={0.3}>
+          <div className="text-center mt-16">
+            <p className="text-muted-foreground mb-4">
+              Follow us on Instagram for more delicious updates!
+            </p>
+            <Button
+              asChild
+              className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8"
             >
-              <Instagram size={20} />
-              @pinchofyumbyeesha
-            </a>
-          </Button>
-        </div>
+              <a
+                href="https://www.instagram.com/pinchofyumbyeesha"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
+                <Instagram size={20} />
+                @pinchofyumbyeesha
+              </a>
+            </Button>
+          </div>
+        </SlideIn>
       </div>
 
       {/* Lightbox */}

@@ -1,4 +1,8 @@
+"use client"
+
 import { Phone, Mail, MapPin, Clock, Instagram, Facebook, MessageCircle } from "lucide-react"
+import { SlideIn } from "@/components/animations/slide-in"
+import { StaggerContainer } from "@/components/animations/stagger-container"
 
 const contactDetails = [
   {
@@ -51,20 +55,22 @@ const socialLinks = [
 export function ContactInfo() {
   return (
     <div className="space-y-8">
-      <div>
-        <span className="text-primary font-medium text-sm uppercase tracking-wider">Get in Touch</span>
-        <h2 className="font-serif text-3xl sm:text-4xl font-bold mt-2 text-foreground">
-          We Would Love to Hear From You
-        </h2>
-        <p className="text-muted-foreground mt-4 leading-relaxed">
-          Ready to place an order or have questions about our menu? Reach out through 
-          any of the channels below. We are available on WhatsApp, Instagram, and Facebook 
-          for your convenience.
-        </p>
-      </div>
+      <SlideIn direction="left">
+        <div>
+          <span className="text-primary font-medium text-sm uppercase tracking-wider">Get in Touch</span>
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold mt-2 text-foreground">
+            We Would Love to Hear From You
+          </h2>
+          <p className="text-muted-foreground mt-4 leading-relaxed">
+            Ready to place an order or have questions about our menu? Reach out through
+            any of the channels below. We are available on WhatsApp, Instagram, and Facebook
+            for your convenience.
+          </p>
+        </div>
+      </SlideIn>
 
       {/* Contact Details */}
-      <div className="space-y-4">
+      <StaggerContainer direction="up" className="space-y-4" childClassName="">
         {contactDetails.map((detail, index) => (
           <div
             key={index}
@@ -88,26 +94,28 @@ export function ContactInfo() {
             </div>
           </div>
         ))}
-      </div>
+      </StaggerContainer>
 
       {/* Social Links */}
-      <div>
-        <h3 className="font-serif text-xl font-semibold mb-4 text-foreground">Order Via</h3>
-        <div className="flex gap-4">
-          {socialLinks.map((social, index) => (
-            <a
-              key={index}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`w-12 h-12 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110 ${social.color}`}
-              aria-label={social.label}
-            >
-              <social.icon size={24} />
-            </a>
-          ))}
+      <SlideIn direction="left" delay={0.3}>
+        <div>
+          <h3 className="font-serif text-xl font-semibold mb-4 text-foreground">Order Via</h3>
+          <div className="flex gap-4">
+            {socialLinks.map((social, index) => (
+              <a
+                key={index}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`w-12 h-12 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110 ${social.color}`}
+                aria-label={social.label}
+              >
+                <social.icon size={24} />
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
+      </SlideIn>
     </div>
   )
 }

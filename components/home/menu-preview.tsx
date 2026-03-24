@@ -2,6 +2,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
+import { SlideIn } from "@/components/animations/slide-in"
+import { StaggerContainer } from "@/components/animations/stagger-container"
 
 const categories = [
   {
@@ -28,17 +30,23 @@ export function MenuPreview() {
   return (
     <section className="py-20">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="text-center mb-12">
-          <span className="text-primary font-medium text-sm uppercase tracking-wider">Our Menu</span>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold mt-2 text-foreground">
-            Explore Our Categories
-          </h2>
-          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-            From fresh salads to hearty entrées and decadent desserts, we have something for every craving.
-          </p>
-        </div>
+        <SlideIn>
+          <div className="text-center mb-12">
+            <span className="text-primary font-medium text-sm uppercase tracking-wider">Our Menu</span>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold mt-2 text-foreground">
+              Explore Our Categories
+            </h2>
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+              From fresh salads to hearty entrées and decadent desserts, we have something for every craving.
+            </p>
+          </div>
+        </SlideIn>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <StaggerContainer
+          direction="up"
+          className="grid md:grid-cols-3 gap-8"
+          childClassName=""
+        >
           {categories.map((category, index) => (
             <div
               key={index}
@@ -70,20 +78,22 @@ export function MenuPreview() {
               </div>
             </div>
           ))}
-        </div>
+        </StaggerContainer>
 
-        <div className="text-center mt-12">
-          <Button
-            asChild
-            size="lg"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 group"
-          >
-            <Link href="/menu">
-              View Full Menu
-              <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </Button>
-        </div>
+        <SlideIn delay={0.3}>
+          <div className="text-center mt-12">
+            <Button
+              asChild
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 group"
+            >
+              <Link href="/menu">
+                View Full Menu
+                <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
+          </div>
+        </SlideIn>
       </div>
     </section>
   )
